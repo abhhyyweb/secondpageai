@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoolFizz Drinks</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+    header{
+      width:100%;
+      min-height:100vh;
+      background:linear-gradient(135deg,#0f172a,#1e293b,#0ea5e9);
+      position:relative;
+      overflow:hidden;
+    }
+
+    nav{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:25px 8%;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      background:rgba(0,0,0,0.3);
+      backdrop-filter:blur(10px);
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:bold;
+      color:#38bdf8;
+      letter-spacing:2px;
+    }
+
+    .menu{
+      display:flex;
+      gap:20px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:white;
+      font-size:18px;
+      padding:10px 18px;
+      border-radius:30px;
+      transition:0.4s;
+    }
+
+    .menu a:hover{
+      background:#38bdf8;
+      color:#000;
+    }
+
+    .hero{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:160px 8%;
+      flex-wrap:wrap;
+    }
+
+    .hero-text{
+      flex:1;
+      min-width:300px;
+      animation:slideLeft 1.5s ease;
+    }
+
+    .hero-text h1{
+      font-size:70px;
+      line-height:1.2;
+      margin-bottom:20px;
+    }
+
+    .hero-text p{
+      font-size:20px;
+      line-height:1.8;
+      margin-bottom:30px;
+      max-width:600px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:15px 35px;
+      background:#38bdf8;
+      color:black;
+      font-size:20px;
+      border-radius:40px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.4s;
+    }
+
+    .btn:hover{
+      background:white;
+      transform:scale(1.05);
+    }
+
+    .hero-image{
+      flex:1;
+      text-align:center;
+      min-width:300px;
+      animation:float 4s ease-in-out infinite;
+    }
+
+    .hero-image img{
+      width:420px;
+      max-width:100%;
+      filter:drop-shadow(0px 0px 30px #38bdf8);
+    }
+
+    /* FLOATING BUBBLES */
+    .bubble{
+      position:absolute;
+      bottom:-100px;
+      background:rgba(255,255,255,0.2);
+      border-radius:50%;
+      animation:bubble 12s linear infinite;
+    }
+
+    .bubble:nth-child(1){
+      width:40px;
+      height:40px;
+      left:10%;
+      animation-duration:8s;
+    }
+
+    .bubble:nth-child(2){
+      width:70px;
+      height:70px;
+      left:35%;
+      animation-duration:12s;
+    }
+
+    .bubble:nth-child(3){
+      width:30px;
+      height:30px;
+      left:60%;
+      animation-duration:10s;
+    }
+
+    .bubble:nth-child(4){
+      width:90px;
+      height:90px;
+      left:85%;
+      animation-duration:14s;
+    }
+
+    /* ABOUT SECTION */
+    section{
+      padding:100px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:50px;
+      margin-bottom:60px;
+      color:#38bdf8;
+    }
+
+    .about{
+      display:flex;
+      gap:50px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .about img{
+      width:500px;
+      max-width:100%;
+      border-radius:20px;
+      box-shadow:0 0 25px #38bdf8;
+    }
+
+    .about-text{
+      flex:1;
+      font-size:19px;
+      line-height:2;
+    }
+
+    /* SERVICES */
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .service-box{
+      background:#1e293b;
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.5s;
+      box-shadow:0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .service-box:hover{
+      transform:translateY(-10px);
+    }
+
+    .service-box img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
+
+    .service-content{
+      padding:25px;
+    }
+
+    .service-content h3{
+      margin-bottom:15px;
+      color:#38bdf8;
+      font-size:28px;
+    }
+
+    .service-content p{
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    /* PRODUCTS */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .product-box{
+      background:#1e293b;
+      padding:20px;
+      border-radius:20px;
+      text-align:center;
+      transition:0.5s;
+    }
+
+    .product-box:hover{
+      transform:scale(1.05);
+    }
+
+    .product-box img{
+      width:100%;
+      height:280px;
+      object-fit:cover;
+      border-radius:15px;
+      margin-bottom:20px;
+    }
+
+    .product-box h3{
+      color:#38bdf8;
+      margin-bottom:15px;
+      font-size:25px;
+    }
+
+    .product-box p{
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#020617;
+      font-size:18px;
+    }
+
+    /* ANIMATIONS */
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-20px);}
+      100%{transform:translateY(0px);}
+    }
+
+    @keyframes slideLeft{
+      from{
+        opacity:0;
+        transform:translateX(-100px);
+      }
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    @keyframes bubble{
+      0%{
+        transform:translateY(0);
+        opacity:0;
+      }
+      50%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-1200px);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:900px){
+      .hero-text h1{
+        font-size:50px;
+      }
+
+      .hero{
+        text-align:center;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+
+    <nav>
+      <div class="logo">CoolFizz</div>
+
+      <div class="menu">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Fresh Cool Drinks For Every Mood</h1>
+
+        <p>
+          Experience the next generation of refreshing drinks with CoolFizz.
+          Enjoy sparkling flavors, fruity freshness, and stylish energy drinks
+          designed for modern lifestyles and trending tastes around the world.
+        </p>
+
+        <a href="#" class="btn">Get Started</a>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=1200&auto=format&fit=crop" alt="Cool Drink">
+      </div>
+    </div>
+
+    <!-- BUBBLES -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <h2 class="section-title">About Our Drinks</h2>
+
+    <div class="about">
+
+      <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="">
+
+      <div class="about-text">
+        <p>
+          CoolFizz is a modern cool drink brand created for people who love
+          freshness, energy, and style. Our drinks are made with exciting fruit
+          flavors, sparkling ingredients, and refreshing combinations that make
+          every moment enjoyable. Whether you are relaxing with friends, working
+          hard during the day, or enjoying a weekend party, CoolFizz delivers
+          the perfect taste experience with every sip. We focus on premium
+          quality, modern packaging, and unforgettable flavors that are loved by
+          drink fans around the world. Every bottle is crafted to provide a cool
+          and energetic feeling that keeps you refreshed anytime and anywhere.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+
+    <h2 class="section-title">Our Services</h2>
+
+    <div class="services">
+
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <div class="service-content">
+          <h3>Fresh Delivery</h3>
+          <p>
+            We deliver fresh and chilled drinks directly to your location with
+            fast and secure service. Enjoy premium beverage quality every single
+            day with fast online ordering support.
+          </p>
+        </div>
+      </div>
+
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <div class="service-content">
+          <h3>Party Drinks</h3>
+          <p>
+            Make your events exciting with colorful and sparkling cool drinks.
+            Our party collections include unique flavors and stylish serving
+            options for all celebrations and gatherings.
+          </p>
+        </div>
+      </div>
+
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <div class="service-content">
+          <h3>Healthy Energy</h3>
+          <p>
+            Our drinks are designed with refreshing ingredients and fruity taste
+            combinations to provide a cool and energetic experience for modern
+            lifestyles and active daily routines.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+
+    <h2 class="section-title">Trending Products</h2>
+
+    <div class="products">
+
+      <div class="product-box">
+        <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <h3>Berry Blast</h3>
+
+        <p>
+          A sweet and refreshing berry flavored drink made for cool summer
+          moments. Enjoy sparkling freshness and colorful taste with every sip
+          of this exciting beverage.
+        </p>
+      </div>
+
+      <div class="product-box">
+        <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <h3>Lemon Spark</h3>
+
+        <p>
+          Fresh lemon flavor combined with sparkling soda gives an energetic and
+          relaxing feeling. Perfect for parties, relaxing evenings, and hot
+          sunny afternoons.
+        </p>
+      </div>
+
+      <div class="product-box">
+        <img src="https://images.unsplash.com/photo-1437418747212-8d9709afab22?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <h3>Orange Chill</h3>
+
+        <p>
+          Enjoy natural orange taste blended with icy freshness and sparkling
+          bubbles. This cool drink brings a vibrant and energetic experience for
+          every occasion.
+        </p>
+      </div>
+
+      <div class="product-box">
+        <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <h3>Mint Freeze</h3>
+
+        <p>
+          Mint Freeze delivers cool mint flavor with refreshing sparkling
+          texture. A perfect drink choice for relaxation, refreshment, and
+          modern lifestyle enjoyment every day.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <p>&copy; 2026 My Website. All rights reserved.</p>
+  </footer>
+
+  <style>
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    </style>
+    
+    <footer>
+      <p>&copy; 2026 My Website. All rights reserved.</p>
+    </footer>
+
+    <footer>
+      <p>&copy; 2026 My Website</p>
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Contact</a> |
+      <a href="#">About</a>
+    </footer>
+
+    
+
+</body>
+</html>
